@@ -117,15 +117,19 @@ class DC_Unet(nn.Module):
         # Encoder layers
         super(DC_Unet, self).__init__()
         self.dc_block1 = DC_Block_Encoder(0, w[0], init_block=True, initial_channels=initial_channels)
+
         self.dc_block2 = nn.Sequential(
             nn.MaxPool2d(kernel_size=2, stride=2),
             DC_Block_Encoder(w[0], w[1]))
+
         self.dc_block3 = nn.Sequential(
             nn.MaxPool2d(kernel_size=2, stride=2),
             DC_Block_Encoder(w[1], w[2]))
+
         self.dc_block4 = nn.Sequential(
             nn.MaxPool2d(kernel_size=2, stride=2),
             DC_Block_Encoder(w[2], w[3]))
+
         self.dc_block5 = nn.Sequential(
             nn.MaxPool2d(kernel_size=2, stride=2),
             DC_Block_Encoder(w[3], w[4]),
